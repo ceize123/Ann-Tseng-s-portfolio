@@ -57,7 +57,6 @@ interface props {
 
 export const WorkDetails: React.FC<props> = ({ work }) => {
   const [drawArray, setDrawArray] = useState<any[]>([])
-  const { title, banner, year, overview, sketches } = work.fields
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -69,8 +68,6 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     return () => clearTimeout(timer)
   }, [])
 
-  // if (!work) return <Skeleton />
-
   const getSections = (data: any) => {
     const ary = Object.keys(data)
     for (const item of ary) {
@@ -79,8 +76,12 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
       }
     }
   }
+  useEffect(() => {
+    getSections(work.fields)
+  }, [work])
 
-  getSections(work.fields)
+  if (!work) return <Skeleton />
+  const { title, banner, year, overview, sketches } = work.fields
 
   const renderDrawings = () => {
     const returnVal = sketches.slice(1).map((item: any, idx: number) => {
