@@ -80,9 +80,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     }
   }
 
-  useEffect(() => {
-    getSections(work.fields)
-  }, [work])
+  getSections(work.fields)
 
   const renderDrawings = () => {
     const returnVal = sketches.slice(1).map((item: any, idx: number) => {
