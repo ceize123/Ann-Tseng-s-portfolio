@@ -1,13 +1,13 @@
-import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import 'styles/globals.css'
-import Navbar from 'components/Navbar'
-import Footer from 'components/Footer'
-import { HeroImage } from 'components/Background-Animation'
-import { cn } from 'helpers'
+import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import 'styles/globals.css';
+import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
+// import { HeroImage } from 'components/Background-Animation'
+import { cn } from 'helpers';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div
@@ -17,11 +17,11 @@ export default function App({ Component, pageProps }: AppProps) {
       )}
     >
       <Navbar />
-      {router.route === '/' && <HeroImage />}
+      {/* {router.route === '/' && <HeroImage />} */}
       <div className='container mx-auto mt-14'>
         <Component {...pageProps} />
       </div>
       <Footer />
     </div>
-  )
+  );
 }

@@ -1,9 +1,12 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export const Hero: React.FC = () => {
   return (
-    <section className='hero-section h-screen flex flex-col justify-center -mt-14'>
-      <div className='relative'>
+    <section
+      id='hero-section'
+      className='hero-section h-screen flex flex-col justify-center -mt-14'
+    >
+      <div>
         <h1 className='inline sm:ml-20 ml-4 tracking-wider'>
           INTERIOR.FURNITURE
         </h1>
@@ -30,14 +33,14 @@ export const Hero: React.FC = () => {
             Effectively bring artistically and business professional solutions
             to clients.
           </span>
-          <span className='block'>
+          <span className='block relative z-20'>
             Worked on individual projects and as well as collaborated with
             others as a team
           </span>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
