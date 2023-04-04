@@ -1,12 +1,12 @@
-import DataImage from 'components/Data-Image'
+import DataImage from 'components/Data-Image';
+import { Asset } from 'types/assets';
 
 interface props {
-  ary: any
-  aryIdx: number
+  ary: any;
+  aryIdx: number;
 }
 
 export const Draw: React.FC<props> = ({ ary, aryIdx }) => {
-  console.log(ary)
   return ary.map((item: any, idx: number) => {
     return (
       <div
@@ -32,8 +32,8 @@ export const Draw: React.FC<props> = ({ ary, aryIdx }) => {
           <DataImage data={item} />
         </div>
       </div>
-    )
-  })
-}
+    );
+  });
+};
 
-export default Draw
+export default Draw;
