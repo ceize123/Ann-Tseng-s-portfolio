@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import rabbit from 'assets/images/rabbit.png'
-import { PersonalInfo, IconType } from 'components/Personal-Info'
+import Image from 'next/image';
+import rabbit from 'assets/images/rabbit.png';
+import { PersonalInfo, IconType } from 'components/Personal-Info';
 
 export const Resume: React.FC = () => {
   return (
@@ -98,7 +98,7 @@ export const Resume: React.FC = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Resume
+export default Resume;
