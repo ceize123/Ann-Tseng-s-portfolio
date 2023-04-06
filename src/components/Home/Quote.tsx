@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React from 'react';
 
 // https://stackoverflow.com/questions/71397201/access-child-components-ref-inside-parent-component-in-functional-component
 export const Quote: React.FC = () => {
@@ -19,7 +19,7 @@ export const Quote: React.FC = () => {
         </h3>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Quote
+export default Quote;

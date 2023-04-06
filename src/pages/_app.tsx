@@ -8,19 +8,22 @@ import { cn } from 'helpers';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  useEffect(() => {
-    if (router.route === '/') document.body.classList.add('overflow-hidden');
-    else document.body.classList.remove('overflow-hidden');
-  }, [router]);
+  const isHomePage = (): boolean => {
+    return router.route === '/';
+  };
+  // useEffect(() => {
+  //   if (router.route === '/') document.body.classList.add('overflow-hidden');
+  //   else document.body.classList.remove('overflow-hidden');
+  // }, [router]);
   return (
     <div
       className={cn(
         'layout w-full overflow-hidden',
-        router.route === '/' ? 'bg-light-gray text-white' : ''
+        isHomePage() ? 'bg-light-gray text-white' : ''
       )}
     >
       <Navbar />
-      <div className='container mx-auto mt-14'>
+      <div className={cn('container mx-auto', !isHomePage() ? ' mt-14' : '')}>
         <Component {...pageProps} />
       </div>
       <Footer />

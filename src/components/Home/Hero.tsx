@@ -4,7 +4,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id='hero-section'
-      className='hero-section h-screen flex flex-col justify-center -mt-14'
+      className='hero-section h-screen flex flex-col justify-center'
     >
       <div>
         <h1 className='inline sm:ml-20 ml-4 tracking-wider'>

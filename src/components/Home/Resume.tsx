@@ -4,7 +4,7 @@ import { PersonalInfo, IconType } from 'components/Personal-Info';
 
 export const Resume: React.FC = () => {
   return (
-    <section className='pt-20 pb-12 bg-gray' id='about-section'>
+    <section className='bg-gray' id='about-section'>
       <div className='flex flex-col items-center'>
         <Image src={rabbit} width={100} height={100} alt='rabbit' />
         <div className='flex mt-12 sm:flex-row flex-col'>
