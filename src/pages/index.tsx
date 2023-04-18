@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
       const aboutSecTop = pixelRef?.current?.getBoundingClientRect()['top'];
       if (aboutSecTop !== undefined && aboutSecTop < 0) {
         setReached(true);
-        if (aboutSecTop % 8 === 0) {
+        if (aboutSecTop % 15 === 0) {
           setTrigger(aboutSecTop);
         }
       } else {
