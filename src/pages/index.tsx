@@ -1,7 +1,7 @@
 import Hero from 'components/Home/Hero';
 import Quote from 'components/Home/Quote';
 import Resume from 'components/Home/Resume';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import bgUrl from 'assets/images/bg.png';
 import { cn } from 'helpers';
@@ -9,12 +9,15 @@ import { cn } from 'helpers';
 const ary = Array(100)
   .fill(null)
   .map((_, i) => i);
-const randomDark = ary.sort(() => 0.5 - Math.random()).slice(0, 20);
-const randomLight = ary.sort(() => 0.5 - Math.random()).slice(0, 15);
+const colors = { randomDark: ary.slice(0, 20), randomLight: ary.slice(20, 35) };
+ary.sort(() => 0.5 - Math.random());
 
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
-  const [trigger, setTrigger] = useState<number>(0);
+  const [triggerAry, setTriggerAry] = useState<{
+    start: number;
+    end: number;
+  }>({ start: 0, end: 100 });
   const [rate, setRate] = useState<number>(0);
   const pixelRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,18 +26,16 @@ export const Home: React.FC = () => {
   //   const randomLight = ary.sort(() => 0.5 - Math.random()).slice(0, 10);
   //   return { ary, randomDark, randomLight };
   // }, [trigger]);
-  useMemo(() => {
-    ary.sort(() => 0.5 - Math.random());
-    return { ary };
-  }, [trigger]);
 
   useEffect(() => {
     const scroll = () => {
       const aboutSecTop = pixelRef?.current?.getBoundingClientRect()['top'];
       if (aboutSecTop !== undefined && aboutSecTop < 0) {
         setReached(true);
-        if (aboutSecTop % 15 === 0) {
-          setTrigger(aboutSecTop);
+        if (aboutSecTop % 8 === 0) {
+          const start = Math.floor(Math.random() * 20);
+          const end = Math.floor(Math.random() * 59) + 40;
+          setTriggerAry({ start: start, end: end });
         }
       } else {
         setReached(false);
@@ -73,13 +74,15 @@ export const Home: React.FC = () => {
               key={i}
               className={cn(
                 'w-[10%] transition-all duration-500 backdrop-blur-md',
-                !reached ? 'opacity-0' : 'opacity-100'
+                !reached || triggerAry.start > i || triggerAry.end < i
+                  ? 'opacity-0'
+                  : 'opacity-100'
               )}
               style={{
                 backgroundColor: `${
-                  randomDark.includes(i)
+                  colors.randomDark.includes(i)
                     ? 'rgba(0, 0, 0, 0.5)'
-                    : randomLight.includes(i)
+                    : colors.randomLight.includes(i)
                     ? 'rgba(85, 85, 85, 0.5)'
                     : 'rgba(34, 34, 34, 0.5)'
                 }`,
