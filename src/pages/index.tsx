@@ -15,7 +15,6 @@ import { cn } from 'helpers';
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
-  const [pixelW, setPixelW] = useState<number>(0);
   const [ary, setAry] = useState<number[]>(
     Array(80)
       .fill(null)
@@ -38,9 +37,12 @@ export const Home: React.FC = () => {
 
   useMemo(() => {
     if (trigger) {
+      const l = Math.ceil(ary.length) / 5;
+      const r = Math.ceil(ary.length) / 2;
+
       setColors({
-        randomDark: ary.slice(0, 20),
-        randomLight: ary.slice(20, 35),
+        randomDark: ary.slice(0, l),
+        randomLight: ary.slice(l, r),
       });
       ary.sort(() => 0.5 - Math.random());
     }
@@ -72,13 +74,11 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     if (width !== 0) {
-      const w = Math.ceil(width / 20);
       setAry(
-        Array(w)
+        Array(Math.ceil(width / 20))
           .fill(null)
           .map((_, i) => i)
       );
-      setPixelW(w >= 50 ? 10 : 20);
     }
   }, [width]);
 
@@ -100,7 +100,7 @@ export const Home: React.FC = () => {
       </div>
       <div
         className={cn(
-          'pixel w-full h-screen fixed top-0 left-0 flex flex-wrap transition-opacity duration-600',
+          'pixel w-full h-screen fixed top-0 left-0 grid lg:grid-cols-10 md:grid-cols-8 grid-cols-5 transition-opacity duration-600',
           !reached ? 'opacity-0' : 'opacity-100'
         )}
       >
@@ -112,8 +112,7 @@ export const Home: React.FC = () => {
                 'transition-all duration-500 backdrop-blur-md',
                 !reached ? 'opacity-0' : 'opacity-100',
                 colors.randomDark.includes(i) ? 'bg-black' : '',
-                colors.randomLight.includes(i) ? 'bg-gray' : '',
-                `min-w-[${pixelW}%]`
+                colors.randomLight.includes(i) ? 'bg-gray' : ''
               )}
               // style={{
               //   backgroundColor: `${
