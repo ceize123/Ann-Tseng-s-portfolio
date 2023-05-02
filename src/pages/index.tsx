@@ -15,6 +15,7 @@ import { cn } from 'helpers';
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
+  const [pixelW, setPixelW] = useState<number>(0);
   const [ary, setAry] = useState<number[]>(
     Array(80)
       .fill(null)
@@ -70,13 +71,14 @@ export const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(ary);
     if (width !== 0) {
+      const w = Math.ceil(width / 20);
       setAry(
-        Array(Math.ceil(width / 20))
+        Array(w)
           .fill(null)
           .map((_, i) => i)
       );
+      setPixelW(w >= 50 ? 10 : 20);
     }
   }, [width]);
 
@@ -111,7 +113,7 @@ export const Home: React.FC = () => {
                 !reached ? 'opacity-0' : 'opacity-100',
                 colors.randomDark.includes(i) ? 'bg-black' : '',
                 colors.randomLight.includes(i) ? 'bg-gray' : '',
-                `min-w-[${ary.length > 50 ? '10' : '20'}%]`
+                `min-w-[${pixelW}%]`
               )}
               // style={{
               //   backgroundColor: `${
