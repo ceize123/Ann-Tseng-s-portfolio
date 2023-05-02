@@ -6,14 +6,20 @@ import Image from 'next/image';
 import bgUrl from 'assets/images/bg.png';
 import { cn } from 'helpers';
 
-const ary = Array(100)
-  .fill(null)
-  .map((_, i) => i);
+// const ary = Array(80)
+//   .fill(null)
+//   .map((_, i) => i);
 // const colors = { randomDark: ary.slice(0, 20), randomLight: ary.slice(20, 35) };
 // ary.sort(() => 0.5 - Math.random());
 
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(0);
+  const [ary, setAry] = useState<number[]>(
+    Array(80)
+      .fill(null)
+      .map((_, i) => i)
+  );
   const [colors, setColors] = useState<{
     randomDark: number[];
     randomLight: number[];
@@ -41,6 +47,7 @@ export const Home: React.FC = () => {
   }, [trigger]);
 
   useEffect(() => {
+    setWidth(window.innerWidth);
     const scroll = () => {
       const aboutSecTop = pixelRef?.current?.getBoundingClientRect()['top'];
       if (aboutSecTop !== undefined && aboutSecTop < 0) {
@@ -62,6 +69,17 @@ export const Home: React.FC = () => {
     return () => window.removeEventListener('scroll', scroll);
   }, []);
 
+  useEffect(() => {
+    console.log(ary);
+    if (width !== 0) {
+      setAry(
+        Array(Math.ceil(width / 20))
+          .fill(null)
+          .map((_, i) => i)
+      );
+    }
+  }, [width]);
+
   return (
     <>
       <div className='w-screen fixed top-0 left-0'>
@@ -80,7 +98,7 @@ export const Home: React.FC = () => {
       </div>
       <div
         className={cn(
-          'pixel w-full h-screen fixed top-0 left-0 flex flex-wrap transition-opacity duration-200',
+          'pixel w-full h-screen fixed top-0 left-0 flex flex-wrap transition-opacity duration-600',
           !reached ? 'opacity-0' : 'opacity-100'
         )}
       >
@@ -89,10 +107,11 @@ export const Home: React.FC = () => {
             <div
               key={i}
               className={cn(
-                'w-[10%] transition-opacity duration-500 backdrop-blur-md',
+                'transition-all duration-500 backdrop-blur-md',
                 !reached ? 'opacity-0' : 'opacity-100',
                 colors.randomDark.includes(i) ? 'bg-black' : '',
-                colors.randomLight.includes(i) ? 'bg-gray' : ''
+                colors.randomLight.includes(i) ? 'bg-gray' : '',
+                `min-w-[${ary.length > 50 ? '10' : '20'}%]`
               )}
               // style={{
               //   backgroundColor: `${
