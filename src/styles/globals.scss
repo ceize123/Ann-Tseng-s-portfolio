@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@500&family=Lexend+Exa:wght@500&family=Poppins:ital,wght@0,300;0,500;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,17 +6,31 @@
 // General starts
 html,
 body {
-  @apply scroll-smooth font-Lexend;
+  @apply scroll-smooth font-Poppins font-light;
 }
 
 // font
-h1,
-h2 {
-  @apply font-Cormorant font-medium;
-}
 
 h1 {
   @apply xl:text-8xl lg:text-7xl sm:text-4xl text-3xl;
+}
+
+h2 {
+  @apply font-semibold text-xl leading-loose;
+}
+
+h3,
+h4 {
+  @apply font-semibold text-sm leading-normal;
+}
+
+h5 {
+  @apply font-bold text-xs leading-normal;
+}
+
+p,
+li {
+  @apply text-sm;
 }
 
 // span,

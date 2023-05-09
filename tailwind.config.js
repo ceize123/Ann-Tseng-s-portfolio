@@ -12,11 +12,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        Poppins: ['Poppins:ital'],
-        Lexend: ['Lexend+Exa'],
-        Cormorant: ['Cormorant+Infant'],
+        Poppins: ['Poppins'],
+        PoppinsIta: ['Poppins:ital'],
       },
     },
   },
   plugins: [],
-}
+};

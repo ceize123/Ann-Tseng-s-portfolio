@@ -9,14 +9,14 @@ export const Quote: React.FC = () => {
       id='intro-section'
     >
       <div className='leading-normal'>
-        <h3>
+        <h2>
           I focus on using effectively optimize the space to improving people's
           everyday lives in all aspects.
-        </h3>
-        <h3>
+        </h2>
+        <h2>
           Use the power of interior design to evokes happiness and soothes the
           soul that help people live better.
-        </h3>
+        </h2>
       </div>
     </section>
   );

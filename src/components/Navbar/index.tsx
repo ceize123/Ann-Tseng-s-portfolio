@@ -1,30 +1,30 @@
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { IoLogoLinkedin } from 'react-icons/io'
-import { AiOutlineInstagram } from 'react-icons/ai'
-import logo from 'assets/images/logo.png'
-import Image from 'next/image'
-import { cn } from 'helpers'
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { IoLogoLinkedin } from 'react-icons/io';
+import { AiOutlineInstagram } from 'react-icons/ai';
+import logo from 'assets/images/logo.png';
+import Image from 'next/image';
+import { cn } from 'helpers';
 
 export const Navbar: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(true)
-  let oldScrollY = 0
+  const [open, setOpen] = useState<boolean>(true);
+  let oldScrollY = 0;
 
   const handleNavigationDir = () => {
     if (window.scrollY > oldScrollY) {
-      setOpen(false)
+      setOpen(false);
     } else {
-      setOpen(true)
+      setOpen(true);
     }
-    oldScrollY = window.scrollY
-  }
+    oldScrollY = window.scrollY;
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleNavigationDir)
+    window.addEventListener('scroll', handleNavigationDir);
     return () => {
-      window.removeEventListener('scroll', handleNavigationDir)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleNavigationDir);
+    };
+  }, []);
   return (
     <header
       className={cn(
@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
         open ? '-top-0' : '-top-14'
       )}
     >
-      <nav className='flex justify-between items-center mx-4 w-full max-w-7xl'>
+      <nav className='flex justify-between items-center mx-5 w-full max-w-7xl'>
         <div>
           <Link href='/'>
             <Image src={logo} width={100} height={100} alt='logo' />
@@ -40,10 +40,14 @@ export const Navbar: React.FC = () => {
         </div>
         <ul className='flex items-center'>
           <Link className='mr-5' href='/#about-section' scroll={false}>
-            <li>ABOUT</li>
+            <li>
+              <h3>ABOUT</h3>
+            </li>
           </Link>
           <Link className='mr-5' href='/works'>
-            <li>WORK</li>
+            <li>
+              <h3>WORK</h3>
+            </li>
           </Link>
           <Link className='mr-2' href='/'>
             <li>
@@ -58,7 +62,7 @@ export const Navbar: React.FC = () => {
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

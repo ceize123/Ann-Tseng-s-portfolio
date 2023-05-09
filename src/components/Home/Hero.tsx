@@ -14,7 +14,9 @@ export const Hero: React.FC = () => {
       <div className='mt-14'>
         <div className='text-center'>
           <button className='relative after:bg-yellow'>
-            <Link href='/works'>My WORK</Link>
+            <Link href='/works'>
+              <h3>My WORK</h3>
+            </Link>
           </button>
           <div className='absolute bottom-8 left-0 right-0 mx-auto w-4 bg-yellow'>
             <Link
@@ -29,14 +31,14 @@ export const Hero: React.FC = () => {
           </div>
         </div>
         <div className='absolute right-2 bottom-14 md:w-1/3 sm:w-1/2 w-2/3'>
-          <span className='block'>
+          <h5 className='block'>
             Effectively bring artistically and business professional solutions
             to clients.
-          </span>
-          <span className='block relative z-20'>
+          </h5>
+          <h5 className='block relative z-20'>
             Worked on individual projects and as well as collaborated with
             others as a team
-          </span>
+          </h5>
         </div>
       </div>
     </section>
