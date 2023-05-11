@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
         <div className='text-center'>
           <button className='relative after:bg-yellow'>
             <Link href='/works'>
-              <h3>My WORK</h3>
+              <h2>My WORK</h2>
             </Link>
           </button>
           <div className='absolute bottom-8 left-0 right-0 mx-auto w-4 bg-yellow'>

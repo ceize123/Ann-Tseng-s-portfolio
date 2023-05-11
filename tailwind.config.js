@@ -15,6 +15,9 @@ module.exports = {
         Poppins: ['Poppins'],
         PoppinsIta: ['Poppins:ital'],
       },
+      lineHeight: {
+        'extra-loose': '2.5',
+      },
     },
   },
   plugins: [],

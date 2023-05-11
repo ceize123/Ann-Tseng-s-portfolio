@@ -12,11 +12,11 @@ body {
 // font
 
 h1 {
-  @apply xl:text-8xl lg:text-7xl sm:text-4xl text-3xl;
+  @apply font-semibold md:text-5xl text-3xl md:leading-normal leading-tight;
 }
 
 h2 {
-  @apply font-semibold text-xl leading-loose;
+  @apply font-semibold md:text-xl text-lg;
 }
 
 h3,
@@ -30,7 +30,7 @@ h5 {
 
 p,
 li {
-  @apply text-sm;
+  @apply font-light text-base;
 }
 
 // span,

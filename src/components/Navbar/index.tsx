@@ -41,12 +41,12 @@ export const Navbar: React.FC = () => {
         <ul className='flex items-center'>
           <Link className='mr-5' href='/#about-section' scroll={false}>
             <li>
-              <h3>ABOUT</h3>
+              <h2>ABOUT</h2>
             </li>
           </Link>
           <Link className='mr-5' href='/works'>
             <li>
-              <h3>WORK</h3>
+              <h2>WORK</h2>
             </li>
           </Link>
           <Link className='mr-2' href='/'>

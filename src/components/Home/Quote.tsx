@@ -8,15 +8,15 @@ export const Quote: React.FC = () => {
       className='md:mx-16 mx-5 h-screen flex items-center z-20'
       id='intro-section'
     >
-      <div className='leading-normal'>
-        <h2>
+      <div>
+        <h1>
           I focus on using effectively optimize the space to improving people's
           everyday lives in all aspects.
-        </h2>
-        <h2>
+        </h1>
+        <h1>
           Use the power of interior design to evokes happiness and soothes the
           soul that help people live better.
-        </h2>
+        </h1>
       </div>
     </section>
   );
