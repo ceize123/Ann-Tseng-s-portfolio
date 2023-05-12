@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=Poppins:ital,wght@0,300;0,600;1,300;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,7 +21,7 @@ h4 {
 }
 
 h5 {
-  @apply font-bold text-xs leading-normal;
+  @apply font-bold text-xs leading-normal italic;
 }
 
 p,
@@ -41,6 +41,7 @@ span {
 #hero-section,
 #intro-section,
 #about-section,
+#contact-section,
 footer {
   @apply relative z-20;
 }
@@ -61,6 +62,14 @@ footer {
 .hero-section button:hover::after {
   top: 4px;
   left: 0;
+}
+
+.resume-title {
+  @apply sm:mt-24 mt-8;
+}
+
+.resume-subtitle {
+  @apply sm:my-5 my-3;
 }
 
 .work-section .work-card span {

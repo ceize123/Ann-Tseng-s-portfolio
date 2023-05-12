@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=Poppins:ital,wght@0,300;0,600;1,300;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,7 +25,7 @@ h4 {
 }
 
 h5 {
-  @apply font-bold text-xs leading-normal;
+  @apply font-bold text-xs leading-normal italic;
 }
 
 p,
@@ -33,33 +33,9 @@ li {
   @apply font-light text-base;
 }
 
-// span,
-// header li,
-// .about-section li {
-//   font-family: 'Poppins', sans-serif;
-//   font-weight: 300;
-// }
-
 span {
   @apply text-sm;
 }
-
-// h3,
-// .about-section p {
-//   font-family: 'Poppins', sans-serif;
-//   font-weight: 500;
-// }
-
-// h4 {
-//   font-family: 'Poppins', sans-serif;
-//   font-weight: 600;
-// }
-
-// .work-section span {
-//   font-family: 'Lexend Exa', sans-serif;
-//   font-weight: 500;
-// }
-// font
 
 .icon {
   width: 36px;
@@ -72,6 +48,7 @@ span {
 #hero-section,
 #intro-section,
 #about-section,
+#contact-section,
 footer {
   @apply relative z-20;
 }
@@ -95,6 +72,16 @@ footer {
     }
   }
 }
+
+// Resume
+.resume-title {
+  @apply sm:mt-24 mt-8;
+}
+.resume-subtitle {
+  @apply sm:my-5 my-3;
+}
+// Resume
+
 // Home ends
 
 // Work page
