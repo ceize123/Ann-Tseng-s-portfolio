@@ -123,8 +123,8 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
             <DataImage data={banner} />
           </div>
           <div className='ml-5 mb-6'>
-            <h3 className='mt-5'>{title}</h3>
-            <h4 className='mt-2 text-light-gray'>{year}</h4>
+            <h1 className='mt-5'>{title}</h1>
+            <h3 className='mt-2 text-light-gray'>{year}</h3>
           </div>
           <p>{overview}</p>
         </div>
@@ -138,7 +138,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
             <div>
               <DataImage data={sketches[0]} />
             </div>
-            <p className='md:w-2/3'>{sketches[0].fields.description}</p>
+            <h2 className='md:w-2/3'>{sketches[0].fields.description}</h2>
           </div>
           {renderDrawings()}
         </div>

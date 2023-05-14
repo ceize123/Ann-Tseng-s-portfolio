@@ -17,24 +17,24 @@ export const PersonalInfo: React.FC<props> = ({ type }) => {
       case IconType.PHONE:
         returnVal = (
           <>
-            <MdPhoneIphone />
-            <h2 className='ml-1'>(437) 97101353</h2>
+            <MdPhoneIphone className='text-2xl' />
+            <h2 className='ml-1.5'>(437) 97101353</h2>
           </>
         );
         break;
       case IconType.EMAIL:
         returnVal = (
           <>
-            <MdEmail />
-            <h2 className='ml-1'>ann1212123@gmail.com</h2>
+            <MdEmail className='text-2xl' />
+            <h2 className='ml-1.5'>ann1212123@gmail.com</h2>
           </>
         );
         break;
       case IconType.LOCATION:
         returnVal = (
           <>
-            <MdLocationOn />
-            <h2 className='ml-1'>Toronto, ON</h2>
+            <MdLocationOn className='text-2xl' />
+            <h2 className='ml-1.5'>Toronto, ON</h2>
           </>
         );
         break;

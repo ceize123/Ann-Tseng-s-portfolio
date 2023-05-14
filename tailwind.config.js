@@ -6,7 +6,8 @@ module.exports = {
       pink: '#f4cccc',
       yellow: '#fec20e',
       black: '#000',
-      gray: '#222',
+      gray: '#444',
+      dark: '#333',
       'light-gray': '#555',
       white: '#fff',
     },
@@ -14,6 +15,7 @@ module.exports = {
       fontFamily: {
         Poppins: ['Poppins'],
         PoppinsIta: ['Poppins:ital'],
+        Bodoni: ['Bodoni Moda'],
       },
       lineHeight: {
         'extra-loose': '2.5',

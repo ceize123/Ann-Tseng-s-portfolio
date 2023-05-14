@@ -6,12 +6,6 @@ import Image from 'next/image';
 import bgUrl from 'assets/images/bg.png';
 import { cn } from 'helpers';
 
-// const ary = Array(80)
-//   .fill(null)
-//   .map((_, i) => i);
-// const colors = { randomDark: ary.slice(0, 20), randomLight: ary.slice(20, 35) };
-// ary.sort(() => 0.5 - Math.random());
-
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
@@ -28,10 +22,6 @@ export const Home: React.FC = () => {
     randomLight: ary.slice(20, 35),
   });
   const [trigger, setTrigger] = useState<boolean>(false);
-  // const [triggerAry, setTriggerAry] = useState<{
-  //   start: number;
-  //   end: number;
-  // }>({ start: 0, end: 100 });
   const [rate, setRate] = useState<number>(0);
   const pixelRef = useRef<HTMLDivElement | null>(null);
 
@@ -57,9 +47,6 @@ export const Home: React.FC = () => {
         setReached(true);
         if (aboutSecTop % 15 === 0) {
           setTrigger(true);
-          // const start = Math.floor(Math.random() * 20);
-          // const end = Math.floor(Math.random() * 59) + 40;
-          // setTriggerAry({ start: start, end: end });
         } else {
           setTrigger(false);
         }
@@ -74,16 +61,19 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     if (width !== 0) {
+      let length = Math.ceil(width / 20) > 80 ? 80 : Math.ceil(width / 20);
+      length -= length % 10;
       setAry(
-        Array(Math.ceil(width / 20))
+        Array(length)
           .fill(null)
           .map((_, i) => i)
+          .sort(() => 0.5 - Math.random())
       );
     }
   }, [width]);
 
-  return (
-    <>
+  const backgroundRender = () => {
+    return (
       <div className='w-screen fixed top-0 left-0'>
         <Image
           src={bgUrl}
@@ -97,7 +87,18 @@ export const Home: React.FC = () => {
             opacity: 1 - rate,
           }}
         />
+        <div
+          className='w-screen h-screen absolute top-0 bg-black'
+          style={{
+            opacity: !reached ? rate : 0,
+          }}
+        ></div>
       </div>
+    );
+  };
+
+  const pixelRender = () => {
+    return (
       <div
         className={cn(
           'pixel w-full h-screen fixed top-0 left-0 grid lg:grid-cols-10 md:grid-cols-8 grid-cols-5 transition-opacity duration-600',
@@ -111,22 +112,20 @@ export const Home: React.FC = () => {
               className={cn(
                 'transition-all duration-500 backdrop-blur-md',
                 !reached ? 'opacity-0' : 'opacity-100',
-                colors.randomDark.includes(i) ? 'bg-black' : '',
+                colors.randomDark.includes(i) ? 'bg-light-gray' : '',
                 colors.randomLight.includes(i) ? 'bg-gray' : ''
               )}
-              // style={{
-              //   backgroundColor: `${
-              //     colors.randomDark.includes(i)
-              //       ? 'rgba(0, 0, 0, 0.5)'
-              //       : colors.randomLight.includes(i)
-              //       ? 'rgba(85, 85, 85, 0.5)'
-              //       : 'rgba(34, 34, 34, 0.5)'
-              //   }`,
-              // }}
             ></div>
           );
         })}
       </div>
+    );
+  };
+
+  return (
+    <>
+      {backgroundRender()}
+      {pixelRender()}
       <Hero />
       <div ref={pixelRef}>
         <Quote />
