@@ -6,17 +6,17 @@
 // General starts
 html,
 body {
-  @apply scroll-smooth font-Poppins font-light;
+  @apply scroll-smooth font-Poppins font-light tracking-wider;
 }
 
 // font
 
 h1 {
-  @apply font-semibold md:text-5xl text-3xl md:leading-normal leading-tight;
+  @apply font-semibold md:text-5xl text-3xl md:leading-normal leading-tight tracking-wider;
 }
 
 h2 {
-  @apply font-semibold md:text-xl text-lg;
+  @apply font-semibold md:text-xl text-lg tracking-wider;
 }
 
 h3,
@@ -60,14 +60,15 @@ footer {
       content: '';
       transition: all 0.2s ease-in-out;
       position: absolute;
-      top: 7px;
-      left: 5px;
-      width: 100%;
+      top: 10px;
+      left: 10px;
+      width: 80%;
       height: 70%;
       z-index: -1;
     }
     &:hover::after {
       top: 4px;
+      width: 100%;
       left: 0;
     }
   }

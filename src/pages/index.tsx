@@ -8,7 +8,10 @@ import { cn } from 'helpers';
 
 export const Home: React.FC = () => {
   const [reached, setReached] = useState<boolean>(false);
-  const [width, setWidth] = useState<number>(0);
+  const [size, setSize] = useState<{ width: number; height: number }>({
+    width: 0,
+    height: 0,
+  });
   const [ary, setAry] = useState<number[]>(
     Array(80)
       .fill(null)
@@ -18,8 +21,8 @@ export const Home: React.FC = () => {
     randomDark: number[];
     randomLight: number[];
   }>({
-    randomDark: ary.slice(0, 20),
-    randomLight: ary.slice(20, 35),
+    randomDark: ary.slice(0, 15),
+    randomLight: ary.slice(15, 25),
   });
   const [trigger, setTrigger] = useState<boolean>(false);
   const [rate, setRate] = useState<number>(0);
@@ -27,8 +30,8 @@ export const Home: React.FC = () => {
 
   useMemo(() => {
     if (trigger) {
-      const l = Math.ceil(ary.length) / 5;
-      const r = Math.ceil(ary.length) / 2;
+      const l = Math.ceil(ary.length) / 6;
+      const r = Math.ceil(ary.length) / 3;
 
       setColors({
         randomDark: ary.slice(0, l),
@@ -40,19 +43,20 @@ export const Home: React.FC = () => {
   }, [trigger]);
 
   useEffect(() => {
-    setWidth(window.innerWidth);
+    setSize({ width: window.innerWidth, height: window.innerHeight });
     const scroll = () => {
-      const aboutSecTop = pixelRef?.current?.getBoundingClientRect()['top'];
-      if (aboutSecTop !== undefined && aboutSecTop < 0) {
+      const offset = window.pageYOffset;
+      setRate(offset / 1500);
+
+      if (offset !== 0) {
         setReached(true);
-        if (aboutSecTop % 15 === 0) {
+        if (offset % 15 === 0) {
           setTrigger(true);
         } else {
           setTrigger(false);
         }
       } else {
         setReached(false);
-        setRate(window.scrollY / 1500);
       }
     };
     window.addEventListener('scroll', scroll);
@@ -60,8 +64,9 @@ export const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (width !== 0) {
-      let length = Math.ceil(width / 20) > 80 ? 80 : Math.ceil(width / 20);
+    if (size.width !== 0) {
+      let length =
+        Math.ceil(size.width / 20) > 80 ? 80 : Math.ceil(size.width / 20);
       length -= length % 10;
       setAry(
         Array(length)
@@ -70,7 +75,7 @@ export const Home: React.FC = () => {
           .sort(() => 0.5 - Math.random())
       );
     }
-  }, [width]);
+  }, [size]);
 
   const backgroundRender = () => {
     return (
@@ -84,15 +89,15 @@ export const Home: React.FC = () => {
           className='w-full h-auto'
           style={{
             transform: `scale(${rate + 1})`,
-            opacity: 1 - rate,
+            opacity: rate < 0.5 ? 1 - rate : 0.5,
           }}
         />
-        <div
+        {/* <div
           className='w-screen h-screen absolute top-0 bg-black'
           style={{
             opacity: !reached ? rate : 0,
           }}
-        ></div>
+        ></div> */}
       </div>
     );
   };
@@ -123,15 +128,13 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <>
+    <main ref={pixelRef}>
       {backgroundRender()}
       {pixelRender()}
       <Hero />
-      <div ref={pixelRef}>
-        <Quote />
-      </div>
+      <Quote />
       <Resume />
-    </>
+    </main>
   );
 };
 export default Home;
