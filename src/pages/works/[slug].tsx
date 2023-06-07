@@ -61,6 +61,7 @@ interface props {
 }
 
 export const WorkDetails: React.FC<props> = ({ work }) => {
+  console.log(work);
   const [drawArray, setDrawArray] = useState<Asset[]>([]);
 
   useEffect(() => {
@@ -73,63 +74,76 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const getSections = (data: EntryFields) => {
-    console.log(data);
-    Object.keys(data).forEach((key) => {
-      const value = data[key];
-      if (value) {
-        setDrawArray([...drawArray, value as Asset]);
-      }
-    });
-  };
-  useEffect(() => {
-    getSections(work.fields);
-  }, [work]);
+  // const getSections = (data: EntryFields) => {
+  //   Object.keys(data).forEach((key) => {
+  //     const value = data[key];
+  //     if (value) {
+  //       setDrawArray([...drawArray, value as Asset]);
+  //     }
+  //   });
+  // };
+  // useEffect(() => {
+  //   getSections(work.fields);
+  // }, [work]);
 
   if (!work) return <Skeleton />;
-  const { title, banner, year, overview, sketches } = work.fields;
+  const { title, banner, year, skill, software, overview } = work.fields;
 
-  const renderDrawings = () => {
-    const returnVal = sketches.slice(1).map((item: Asset, idx: number) => {
-      return (
-        <div key={idx} className='md:w-full w-1/3'>
-          <DataImage data={item} />
-        </div>
-      );
-    });
-    return (
-      <div className='lg:col-span-2 md:col-span-3 md:self-center flex justify-center md:block'>
-        {returnVal}
-      </div>
-    );
-  };
+  // const renderDrawings = () => {
+  //   const returnVal = sketches.slice(1).map((item: Asset, idx: number) => {
+  //     return (
+  //       <div key={idx} className='md:w-full w-1/3'>
+  //         <DataImage data={item} />
+  //       </div>
+  //     );
+  //   });
+  //   return (
+  //     <div className='lg:col-span-2 md:col-span-3 md:self-center flex justify-center md:block'>
+  //       {returnVal}
+  //     </div>
+  //   );
+  // };
 
-  const renderSectionArray = () => {
-    const returnVal = drawArray.map((item: Asset, idx: number) => {
-      return (
-        <div key={idx} className='mt-20 md:pb-20 pb-8' data-aos='fade-up'>
-          <Draws ary={item} aryIdx={idx} />
-        </div>
-      );
-    });
-    return <section className='md:pb-20 pb-12'>{returnVal}</section>;
+  // const renderSectionArray = () => {
+  //   const returnVal = drawArray.map((item: Asset, idx: number) => {
+  //     return (
+  //       <div key={idx} className='mt-20 md:pb-20 pb-8' data-aos='fade-up'>
+  //         <Draws ary={item} aryIdx={idx} />
+  //       </div>
+  //     );
+  //   });
+  //   return <section>{returnVal}</section>;
+  // };
+
+  const renderTextArray = (textAry: string[]) => {
+    return textAry.map((item: string, idx: number) => (
+      <span key={idx}>
+        {item}
+        {idx < textAry.length - 1 ? ', ' : ''}
+      </span>
+    ));
   };
 
   return (
-    <main className='px-14'>
-      <section className='banner flex justify-center md:py-24 py-16 min-h-screen'>
-        <div className='max-w-4xl w-full'>
-          <div>
-            <DataImage data={banner} />
+    <main className='px-2 md:px-0'>
+      <section className='banner min-h-screen md:py-24 py-16'>
+        <div className='max-w-7xl md:mb-16 mb-8 mx-auto'>
+          <DataImage data={banner} />
+        </div>
+        <div className='max-w-4xl mx-auto'>
+          <div className='ml-4'>
+            <h1 className='mb-4'>{title}</h1>
+            {skill && <h3 className='mb-1'>{renderTextArray(skill)}</h3>}
+            {software && <h3 className='mb-1'>{renderTextArray(software)}</h3>}
+            <h3>{year}</h3>
           </div>
-          <div className='ml-5 mb-6'>
-            <h1 className='mt-5'>{title}</h1>
-            <h3 className='mt-2 text-light-gray'>{year}</h3>
+          <div className='mt-28'>
+            <h2>{overview}</h2>
           </div>
-          <p>{overview}</p>
         </div>
       </section>
-      <section className='md:py-20 py-12 min-h-screen'>
+
+      {/* <section className='min-h-screen'>
         <div
           className='md:grid md:grid-cols-8 md:gap-2 flex flex-col'
           data-aos='fade-up'
@@ -142,8 +156,8 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
           </div>
           {renderDrawings()}
         </div>
-      </section>
-      {renderSectionArray()}
+      </section> */}
+      {/* {renderSectionArray()} */}
     </main>
   );
 };

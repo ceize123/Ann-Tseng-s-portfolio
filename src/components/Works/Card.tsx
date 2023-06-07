@@ -1,18 +1,18 @@
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-import { cn } from 'helpers'
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { cn } from 'helpers';
 
 interface props {
-  work: any
-  num: number
+  work: any;
+  num: number;
 }
 
 export const Card: React.FC<props> = ({ work, num }) => {
-  const [active, setActive] = useState(false)
-  const { slug, thumbnail, title } = work
-  const strings = title.split('')
+  const [active, setActive] = useState(false);
+  const { slug, thumbnail, title } = work;
+  const strings = title.split('');
 
   const renderString = () => {
     const returnVal = strings.map((char: string, index: number) => {
@@ -20,24 +20,24 @@ export const Card: React.FC<props> = ({ work, num }) => {
         <span key={index} className={`${active && 'active effect'}`}>
           {char}
         </span>
-      )
-    })
+      );
+    });
     return (
       <div className={`text-yellow absolute pl-5 w-1/2 sm:bottom-7 bottom-3`}>
         <h2>{returnVal}</h2>
       </div>
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    setActive(true)
+    setActive(true);
     setTimeout(() => {
       AOS.init({
         offset: 150,
         duration: 1000,
-      })
-    }, 1000)
-  }, [work])
+      });
+    }, 1000);
+  }, [work]);
 
   return (
     <Link href={`/works/${slug}`}>
@@ -50,18 +50,18 @@ export const Card: React.FC<props> = ({ work, num }) => {
       >
         <div
           className={cn(
-            'work-card-bg w-full h-0 pb-[100%] transition-all',
-            !active ? 'scale-110' : ''
+            'work-card-bg w-full h-0 pb-[100%] transition-all duration-300 grayscale',
+            !active ? 'scale-110 grayscale-0' : ''
           )}
           style={{
-            background: `url(https:${thumbnail[0].fields.file.url}) 
+            background: `url(https:${thumbnail.fields.file.url}) 
 							no-repeat center center / cover `,
           }}
         ></div>
-        {renderString()}
+        <h3>{renderString()}</h3>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

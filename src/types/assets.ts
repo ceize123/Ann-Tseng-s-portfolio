@@ -47,16 +47,14 @@ export interface Asset {
 }
 
 export interface EntryFields {
-  [key: string]: string | number | Asset[] | Asset;
-  title: string;
-  year: number;
   thumbnail: Asset[];
   slug: string;
   banner: Asset;
   overview: string;
-  sketches: Asset[];
-  sec1Drawing: Asset[];
-  sec2Drawing: Asset[];
+  title: string;
+  skill?: string[];
+  software?: string[];
+  year: number;
 }
 
 interface EntrySys {
@@ -132,6 +130,8 @@ interface RootObject {
   };
   fields: {
     title: string;
+    skill?: string[];
+    software?: string[];
     year: number;
     thumbnail: Asset[];
     slug: string;

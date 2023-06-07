@@ -12,7 +12,7 @@ h1 {
 }
 
 h2 {
-  @apply font-semibold md:text-xl text-lg tracking-wider;
+  @apply font-semibold md:text-xl text-lg tracking-wider  md:leading-relaxed leading-relaxed;
 }
 
 h3,
