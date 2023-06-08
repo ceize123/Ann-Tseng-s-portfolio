@@ -87,7 +87,17 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
   // }, [work]);
 
   if (!work) return <Skeleton />;
-  const { title, banner, year, skill, software, overview } = work.fields;
+  const {
+    title,
+    banner,
+    year,
+    skill,
+    software,
+    overview,
+    process,
+    spacePlanning,
+    rendering3D,
+  } = work.fields;
 
   // const renderDrawings = () => {
   //   const returnVal = sketches.slice(1).map((item: Asset, idx: number) => {
@@ -124,25 +134,69 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     ));
   };
 
+  const renderProcess = () => {
+    return process?.map((item) => (
+      <div key={item.sys.id} className='mt-48' data-aos='fade-up'>
+        <DataImage data={item} />
+        {item.fields.description && (
+          <div className='large-margin text-center'>
+            <h2>{item.fields.description}</h2>
+          </div>
+        )}
+      </div>
+    ));
+  };
+
+  const renderSpacePlanning = () => {
+    return (
+      <div className='mt-48 grid grid-cols-2 gap-x-8'>
+        {spacePlanning?.map((item, idx) => {
+          return (
+            <>
+              {idx % 2 === 0 && item.fields.description && (
+                <div className='large-margin text-center col-span-2 order-last'>
+                  <h2>{item.fields.description}</h2>
+                </div>
+              )}
+              <div key={item.sys.id} className='col-span-1'>
+                <DataImage data={item} />
+              </div>
+            </>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const render3Ds = () => {
+    return rendering3D?.map((item) => (
+      <div key={item.sys.id} className='mt-48' data-aos='fade-up'>
+        <DataImage data={item} />
+      </div>
+    ));
+  };
+
   return (
-    <main className='px-2 md:px-0'>
+    <main className='px-2 md:px-0 project-page'>
       <section className='banner min-h-screen md:py-24 py-16'>
         <div className='max-w-7xl md:mb-16 mb-8 mx-auto'>
           <DataImage data={banner} />
         </div>
         <div className='max-w-4xl mx-auto'>
-          <div className='ml-4'>
+          <div className='ml-4' data-aos='fade-up'>
             <h1 className='mb-4'>{title}</h1>
             {skill && <h3 className='mb-1'>{renderTextArray(skill)}</h3>}
             {software && <h3 className='mb-1'>{renderTextArray(software)}</h3>}
             <h3>{year}</h3>
           </div>
-          <div className='mt-28'>
+          <div className='large-margin' data-aos='fade-up'>
             <h2>{overview}</h2>
           </div>
         </div>
       </section>
-
+      <section>{process && renderProcess()}</section>
+      <section>{spacePlanning && renderSpacePlanning()}</section>
+      <section>{rendering3D && render3Ds()}</section>
       {/* <section className='min-h-screen'>
         <div
           className='md:grid md:grid-cols-8 md:gap-2 flex flex-col'

@@ -107,6 +107,14 @@ footer {
 }
 // Work ends
 
+// Project starts
+.project-page {
+  .large-margin {
+    @apply mt-32;
+  }
+}
+// Project ends
+
 // Skeleton starts
 .skeleton {
   max-width: 1200px;

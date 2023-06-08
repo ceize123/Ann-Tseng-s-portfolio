@@ -89,6 +89,10 @@ footer {
   transition-delay: 0.45s;
 }
 
+.project-page .large-margin {
+  @apply mt-32;
+}
+
 .skeleton {
   max-width: 1200px;
 }

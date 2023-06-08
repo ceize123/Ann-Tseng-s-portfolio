@@ -1,17 +1,17 @@
-import Image from 'next/image'
-import { useState } from 'react'
+import Image from 'next/image';
+import { useState } from 'react';
 const cn = (...classes: string[]) => {
-  return classes.filter(Boolean).join(' ')
-}
+  return classes.filter(Boolean).join(' ');
+};
 
 // https://stackoverflow.com/questions/43338763/typescript-property-does-not-exist-on-type-object
 interface props {
-  [key: string]: any
+  [key: string]: any;
 }
 
 export const DataImage: React.FC<props> = ({ data }) => {
-  const [isLoading, setLoading] = useState(true)
-  const { file, title } = data.fields
+  const [isLoading, setLoading] = useState(true);
+  const { file, title } = data.fields;
   return (
     <Image
       src={`https:${file.url}`}
@@ -27,7 +27,7 @@ export const DataImage: React.FC<props> = ({ data }) => {
       )}
       onLoadingComplete={() => setLoading(false)}
     />
-  )
-}
+  );
+};
 
-export default DataImage
+export default DataImage;

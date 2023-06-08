@@ -1,4 +1,4 @@
-interface AssetFields {
+interface ImageFields {
   title: string;
   description?: string;
   file: {
@@ -43,11 +43,11 @@ export interface Asset {
     tags: never[];
   };
   sys: AssetSys;
-  fields: AssetFields;
+  fields: ImageFields;
 }
 
 export interface EntryFields {
-  thumbnail: Asset[];
+  thumbnail: Asset;
   slug: string;
   banner: Asset;
   overview: string;
@@ -55,6 +55,9 @@ export interface EntryFields {
   skill?: string[];
   software?: string[];
   year: number;
+  process?: Asset[];
+  spacePlanning?: Asset[];
+  rendering3D?: Asset[];
 }
 
 interface EntrySys {
@@ -93,48 +96,4 @@ export interface Entry {
   };
   sys: EntrySys;
   fields: EntryFields;
-}
-
-interface RootObject {
-  metadata: {
-    tags: never[];
-  };
-  sys: {
-    space: {
-      sys: {
-        type: 'Link';
-        linkType: 'Space';
-        id: string;
-      };
-    };
-    id: string;
-    type: 'Entry';
-    createdAt: string;
-    updatedAt: string;
-    environment: {
-      sys: {
-        id: string;
-        type: 'Link';
-        linkType: 'Environment';
-      };
-    };
-    revision: number;
-    contentType: {
-      sys: {
-        type: 'Link';
-        linkType: 'ContentType';
-        id: string;
-      };
-    };
-    locale: string;
-  };
-  fields: {
-    title: string;
-    skill?: string[];
-    software?: string[];
-    year: number;
-    thumbnail: Asset[];
-    slug: string;
-    banner: Asset;
-  };
 }
