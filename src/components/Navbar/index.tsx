@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { IoLogoLinkedin } from 'react-icons/io';
 import { AiOutlineInstagram } from 'react-icons/ai';
-import logo from 'assets/images/logo.png';
+import logo from 'assets/images/logo-big.png';
 import Image from 'next/image';
 import { cn } from 'helpers';
 
@@ -28,14 +28,14 @@ export const Navbar: React.FC = () => {
   return (
     <header
       className={cn(
-        'fixed  z-30 bg-light-gray text-white flex justify-center h-14 w-screen transition-all',
+        'fixed z-30 bg-light-gray text-white flex justify-center h-14 w-screen transition-all',
         open ? '-top-0' : '-top-14'
       )}
     >
       <nav className='flex justify-between items-center mx-5 w-full max-w-7xl'>
         <div>
           <Link href='/'>
-            <Image src={logo} width={100} height={100} alt='logo' />
+            <Image src={logo} width={80} height={80} alt='logo' />
           </Link>
         </div>
         <ul className='flex items-center'>

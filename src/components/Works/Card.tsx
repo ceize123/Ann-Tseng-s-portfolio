@@ -17,7 +17,7 @@ export const Card: React.FC<props> = ({ work, num }) => {
   const renderString = () => {
     const returnVal = strings.map((char: string, index: number) => {
       return (
-        <span key={index} className={`${active && 'active effect'}`}>
+        <span key={index} className={`${active && 'active effect '} text-2xl`}>
           {char}
         </span>
       );
@@ -50,7 +50,7 @@ export const Card: React.FC<props> = ({ work, num }) => {
       >
         <div
           className={cn(
-            'work-card-bg w-full h-0 pb-[100%] transition-all duration-300 grayscale',
+            'work-card-bg w-full h-0 pb-[100%] ease-in duration-500 grayscale',
             !active ? 'scale-110 grayscale-0' : ''
           )}
           style={{

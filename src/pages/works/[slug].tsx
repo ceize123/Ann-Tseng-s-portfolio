@@ -139,7 +139,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
       <div key={item.sys.id} className='mt-48' data-aos='fade-up'>
         <DataImage data={item} />
         {item.fields.description && (
-          <div className='large-margin text-center'>
+          <div className='large-margin text-center max-w-4xl mx-auto'>
             <h2>{item.fields.description}</h2>
           </div>
         )}
@@ -154,7 +154,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
           return (
             <>
               {idx % 2 === 0 && item.fields.description && (
-                <div className='large-margin text-center col-span-2 order-last'>
+                <div className='large-margin text-center col-span-2 order-last max-w-4xl mx-auto'>
                   <h2>{item.fields.description}</h2>
                 </div>
               )}
