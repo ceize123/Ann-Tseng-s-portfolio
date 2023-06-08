@@ -79,26 +79,20 @@ export const Home: React.FC = () => {
 
   const backgroundRender = () => {
     return (
-      <div className='w-screen fixed top-0 left-0'>
-        <Image
-          src={bgUrl}
-          width='0'
-          height='0'
-          sizes='100vw'
-          alt='background'
-          className='w-full h-auto'
-          style={{
-            transform: `scale(${rate + 1})`,
-            opacity: rate < 0.5 ? 1 - rate : 0.5,
-          }}
-        />
-        {/* <div
-          className='w-screen h-screen absolute top-0 bg-black'
-          style={{
-            opacity: !reached ? rate : 0,
-          }}
-        ></div> */}
-      </div>
+      // <div className='fixed top-0 left-0 flex justify-center'>
+      <Image
+        src={bgUrl}
+        width='0'
+        height='0'
+        sizes='100%'
+        alt='background'
+        className='min-w-[150vh] min-h-screen fixed top-0 left-0'
+        style={{
+          transform: `scale(${rate + 1})`,
+          opacity: rate < 0.5 ? 1 - rate : 0.5,
+        }}
+      />
+      // </div>
     );
   };
 
