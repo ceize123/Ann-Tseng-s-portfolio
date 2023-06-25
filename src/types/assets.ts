@@ -55,8 +55,10 @@ export interface EntryFields {
   skill?: string[];
   software?: string[];
   year: number;
-  process?: Asset[];
-  spacePlanning?: Asset[];
+  processImage?: Asset[];
+  processDescription?: string[];
+  spacePlanningImage?: Asset[];
+  spacePlanningDescription?: string[];
   rendering3D?: Asset[];
 }
 

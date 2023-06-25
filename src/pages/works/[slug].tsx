@@ -61,7 +61,6 @@ interface props {
 }
 
 export const WorkDetails: React.FC<props> = ({ work }) => {
-  console.log(work);
   const [drawArray, setDrawArray] = useState<Asset[]>([]);
 
   useEffect(() => {
@@ -74,18 +73,6 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  // const getSections = (data: EntryFields) => {
-  //   Object.keys(data).forEach((key) => {
-  //     const value = data[key];
-  //     if (value) {
-  //       setDrawArray([...drawArray, value as Asset]);
-  //     }
-  //   });
-  // };
-  // useEffect(() => {
-  //   getSections(work.fields);
-  // }, [work]);
-
   if (!work) return <Skeleton />;
   const {
     title,
@@ -94,36 +81,12 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     skill,
     software,
     overview,
-    process,
-    spacePlanning,
+    processImage,
+    processDescription,
+    spacePlanningImage,
+    spacePlanningDescription,
     rendering3D,
   } = work.fields;
-
-  // const renderDrawings = () => {
-  //   const returnVal = sketches.slice(1).map((item: Asset, idx: number) => {
-  //     return (
-  //       <div key={idx} className='md:w-full w-1/3'>
-  //         <DataImage data={item} />
-  //       </div>
-  //     );
-  //   });
-  //   return (
-  //     <div className='lg:col-span-2 md:col-span-3 md:self-center flex justify-center md:block'>
-  //       {returnVal}
-  //     </div>
-  //   );
-  // };
-
-  // const renderSectionArray = () => {
-  //   const returnVal = drawArray.map((item: Asset, idx: number) => {
-  //     return (
-  //       <div key={idx} className='mt-20 md:pb-20 pb-8' data-aos='fade-up'>
-  //         <Draws ary={item} aryIdx={idx} />
-  //       </div>
-  //     );
-  //   });
-  //   return <section>{returnVal}</section>;
-  // };
 
   const renderTextArray = (textAry: string[]) => {
     return textAry.map((item: string, idx: number) => (
@@ -135,32 +98,52 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
   };
 
   const renderProcess = () => {
-    return process?.map((item) => (
+    return processImage?.map((item, idx) => (
       <div key={item.sys.id} className='mt-48' data-aos='fade-up'>
         <DataImage data={item} />
-        {item.fields.description && (
-          <div className='large-margin text-center max-w-4xl mx-auto'>
-            <h2>{item.fields.description}</h2>
+        {processDescription && processDescription[idx] && (
+          <div className='large-margin max-w-4xl mx-auto' data-aos='fade-up'>
+            <h2>{processDescription[idx]}</h2>
           </div>
         )}
       </div>
     ));
   };
 
+  const organizeSpace = () => {
+    let count = 0;
+    let res: { image: Asset; description: string }[] = [];
+    spacePlanningImage?.forEach((item, idx) => {
+      res.push({ image: item, description: '' });
+      if (
+        idx % 2 === 0 &&
+        spacePlanningDescription &&
+        spacePlanningDescription[count]
+      ) {
+        res[res.length - 1]['description'] = spacePlanningDescription[count++];
+      }
+    });
+    return res;
+  };
+
   const renderSpacePlanning = () => {
+    const spacePlanning = organizeSpace();
     return (
-      <div className='mt-48 grid grid-cols-2 gap-x-8'>
+      <div className='mt-48 grid grid-cols-2 gap-8'>
         {spacePlanning?.map((item, idx) => {
           return (
             <>
-              {idx % 2 === 0 && item.fields.description && (
-                <div className='large-margin text-center col-span-2 order-last max-w-4xl mx-auto'>
-                  <h2>{item.fields.description}</h2>
+              <div key={idx} className='col-span-1' data-aos='fade-up'>
+                <DataImage data={item.image} />
+              </div>
+              {idx % 2 === 1 && (
+                <div
+                  className='mt-24 mb-32 col-span-2 max-w-4xl mx-auto'
+                  data-aos='fade-up'
+                >
+                  <h2>{spacePlanning[idx - 1].description}</h2>
                 </div>
               )}
-              <div key={item.sys.id} className='col-span-1'>
-                <DataImage data={item} />
-              </div>
             </>
           );
         })}
@@ -194,24 +177,9 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
           </div>
         </div>
       </section>
-      <section>{process && renderProcess()}</section>
-      <section>{spacePlanning && renderSpacePlanning()}</section>
+      <section>{processImage && renderProcess()}</section>
+      <section>{spacePlanningImage && renderSpacePlanning()}</section>
       <section>{rendering3D && render3Ds()}</section>
-      {/* <section className='min-h-screen'>
-        <div
-          className='md:grid md:grid-cols-8 md:gap-2 flex flex-col'
-          data-aos='fade-up'
-        >
-          <div className='md:col-span-5'>
-            <div>
-              <DataImage data={sketches[0]} />
-            </div>
-            <h2 className='md:w-2/3'>{sketches[0].fields.description}</h2>
-          </div>
-          {renderDrawings()}
-        </div>
-      </section> */}
-      {/* {renderSectionArray()} */}
     </main>
   );
 };
