@@ -4,7 +4,7 @@ export const Contact: React.FC = () => {
   return (
     <section
       id='contact-section'
-      className='bg-yellow text-black flex justify-center mt-60'
+      className='bg-yellow text-black flex justify-center lg:mt-40 mt-24'
     >
       <div className='w-full sm:py-10 py-6 px-10 flex justify-between items-center sm:flex-row flex-col max-w-7xl'>
         <h1 className='font-Bodoni mb-3 sm:mb-0'>Contact Me</h1>

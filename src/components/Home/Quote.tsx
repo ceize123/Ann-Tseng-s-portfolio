@@ -5,17 +5,16 @@ import React from 'react';
 export const Quote: React.FC = () => {
   return (
     <section
-      className='md:mx-16 mx-5 h-screen flex items-center z-20'
+      className='md:mx-16 mx-5 min-h-screen flex items-center z-20'
       id='intro-section'
     >
       <div>
         <h1>
-          I focus on using effectively optimize the space to improving people's
-          everyday lives in all aspects.
-        </h1>
-        <h1>
-          Use the power of interior design to evokes happiness and soothes the
-          soul that help people live better.
+          My aim is to create spaces that bring life experience to everyone. I
+          effectively combine artistic and business-oriented solutions to
+          provide clients with an exceptional experience. Whether working
+          individually or as part of a team, my focus remains on creative space
+          planning, captivating color schemes
         </h1>
       </div>
     </section>

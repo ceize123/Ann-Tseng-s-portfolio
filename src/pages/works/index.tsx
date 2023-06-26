@@ -38,7 +38,7 @@ export const Works: React.FC<props> = ({ works }) => {
   return (
     <main>
       <section className='work-section py-10'>
-        <div className='grid md:grid-cols-3 sm:grid-cols-2 gap-10 sm:mx-12 mx-8'>
+        <div className='grid md:grid-cols-3 sm:grid-cols-2 lg:gap-10 gap-6 lg:mx-12 mx-4'>
           {works !== undefined && renderWorkCard()}
         </div>
       </section>

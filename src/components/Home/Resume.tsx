@@ -1,8 +1,26 @@
 import Image from 'next/image';
 import avatar from 'assets/images/avatar.png';
 import { PersonalInfo, IconType } from 'components/Personal-Info';
+import { experience } from './data';
+
+const renderExperience = (title: string, info: string, list: string[]) => {
+  return (
+    <>
+      <div className='resume-subtitle'>
+        <h2>{title}</h2>
+        <h3>{info}</h3>
+      </div>
+      <ul className='list-disc ml-4'>
+        {list.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
 export const Resume: React.FC = () => {
+  const { work1, work2, work3 } = experience;
   return (
     <section id='about-section'>
       <div className='flex justify-center mb-5'>
@@ -42,6 +60,7 @@ export const Resume: React.FC = () => {
                 <li>Adobe Photoshop</li>
                 <li>Auto Cad</li>
                 <li>Sketchup</li>
+                <li>Revit</li>
               </ul>
             </div>
             <div className='resume-title'>
@@ -54,47 +73,12 @@ export const Resume: React.FC = () => {
           </div>
           <div className='resume-title'>
             <h1 className='text-yellow'>EXPERIENCE</h1>
-            <div className='flex flex-col sm:flex-row'>
-              <div className='mr-12'>
-                <div className='resume-subtitle'>
-                  <h2>SET DECORATOR ASSISTANT</h2>
-                  <h3>Freelance, Taiwan 2015-2019</h3>
+            <div>
+              {[work1, work2, work3].map((item, idx) => (
+                <div key={idx} className={idx !== 0 ? 'mt-20' : 'mt-12'}>
+                  {renderExperience(item.title, item.info, item.list)}
                 </div>
-                <ul className='list-disc'>
-                  <li>
-                    Designed and decorated sets and set elements for
-                    advertising,music video and film
-                  </li>
-                  <li>
-                    Created Sketchup models and 3D realistic renderings for
-                    clients to be able to visualize the space
-                  </li>
-                  <li>
-                    Sourced many products such as lighting, furniture, and
-                    fabrics for many different budgets and sciences
-                  </li>
-                </ul>
-              </div>
-              <div className='mr-12'>
-                <div className='resume-subtitle'>
-                  <h2>DISPLAY DESIGNER</h2>
-                  <h3>Penshugen, Taiwan 2019-2021</h3>
-                </div>
-                <ul className='list-disc'>
-                  <li>
-                    Worked extensively with clients and vendors throughout the
-                    design process
-                  </li>
-                  <li>Created display sets using minor carpentry skills</li>
-                  <li>
-                    Contributed CAD drawings of each set and drafted detailed
-                    dimensional drawings for a scene shop to build from
-                  </li>
-                  <li>
-                    Created necessary design, documentation, and management of
-                  </li>
-                </ul>
-              </div>
+              ))}
             </div>
           </div>
         </div>

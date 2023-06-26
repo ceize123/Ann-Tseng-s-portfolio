@@ -17,13 +17,20 @@ export const Card: React.FC<props> = ({ work, num }) => {
   const renderString = () => {
     const returnVal = strings.map((char: string, index: number) => {
       return (
-        <span key={index} className={`${active && 'active effect '} text-2xl`}>
+        <span
+          key={index}
+          className={`${
+            active && 'active effect'
+          } xl:text-5xl lg:text-4xl sm:text-3xl text-5xl`}
+        >
           {char}
         </span>
       );
     });
     return (
-      <div className={`text-yellow absolute pl-5 w-1/2 sm:bottom-7 bottom-3`}>
+      <div
+        className={`text-yellow absolute pl-5 lg:bottom-7 sm:bottom-3 bottom-7`}
+      >
         <h2>{returnVal}</h2>
       </div>
     );

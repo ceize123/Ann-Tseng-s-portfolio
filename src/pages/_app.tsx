@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import 'styles/globals.css';
 import Navbar from 'components/Navbar';
@@ -12,10 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const isHomePage = (): boolean => {
     return router.route === '/';
   };
-  // useEffect(() => {
-  //   if (router.route === '/') document.body.classList.add('overflow-hidden');
-  //   else document.body.classList.remove('overflow-hidden');
-  // }, [router]);
+
   return (
     <div
       className={cn(

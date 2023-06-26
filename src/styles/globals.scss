@@ -12,7 +12,7 @@ body {
 // font
 
 h1 {
-  @apply font-semibold md:text-5xl text-3xl md:leading-normal leading-tight tracking-wider;
+  @apply font-semibold lg:text-5xl text-3xl lg:leading-normal md:leading-normal leading-tight tracking-wider;
 }
 
 h2 {
@@ -79,7 +79,7 @@ footer {
   @apply sm:mt-24 mt-8;
 }
 .resume-subtitle {
-  @apply sm:my-5 my-3;
+  @apply sm:mb-8 mb-4;
 }
 // Resume
 
