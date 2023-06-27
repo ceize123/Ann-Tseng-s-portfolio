@@ -57,8 +57,12 @@ export interface EntryFields {
   year: number;
   processImage?: Asset[];
   processDescription?: string[];
-  spacePlanningImage?: Asset[];
-  spacePlanningDescription?: string[];
+  spacePlanningImage1?: Asset[];
+  spacePlanningDescription1?: string[];
+  spacePlanningImage2?: Asset[];
+  spacePlanningDescription2?: string[];
+  spacePlanningImage3?: Asset[];
+  spacePlanningDescription3?: string[];
   rendering3D?: Asset[];
 }
 

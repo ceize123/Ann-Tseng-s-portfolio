@@ -61,8 +61,6 @@ interface props {
 }
 
 export const WorkDetails: React.FC<props> = ({ work }) => {
-  const [drawArray, setDrawArray] = useState<Asset[]>([]);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       AOS.init({
@@ -83,8 +81,6 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     overview,
     processImage,
     processDescription,
-    spacePlanningImage,
-    spacePlanningDescription,
     rendering3D,
   } = work.fields;
 
@@ -110,43 +106,43 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     ));
   };
 
-  const organizeSpace = () => {
-    let count = 0;
-    let res: { image: Asset; description: string }[] = [];
-    spacePlanningImage?.forEach((item, idx) => {
-      res.push({ image: item, description: '' });
-      if (
-        idx % 2 === 0 &&
-        spacePlanningDescription &&
-        spacePlanningDescription[count]
-      ) {
-        res[res.length - 1]['description'] = spacePlanningDescription[count++];
-      }
+  const getSpacePlanning = (data: any) => {
+    let ary: { image: Asset[]; description: string[] }[] = [];
+    Object.keys(work.fields).map((item) => {
+      if (item.includes('spacePlanningImage'))
+        ary.push({ image: data[item], description: [] });
+      if (item.includes('spacePlanningDescription'))
+        ary[ary.length - 1]['description'] = data[item];
     });
-    return res;
+    return ary;
   };
 
   const renderSpacePlanning = () => {
-    const spacePlanning = organizeSpace();
+    const spacePlanning = getSpacePlanning(work.fields);
     return (
       <div className='mt-48 grid grid-cols-2 gap-8'>
-        {spacePlanning?.map((item, idx) => {
-          return (
-            <>
-              <div key={idx} className='col-span-1' data-aos='fade-up'>
-                <DataImage data={item.image} />
+        {spacePlanning?.map((item, index) => (
+          <>
+            {item.image.map((img, idx) => (
+              <div
+                key={idx}
+                className={`col-span-1 ${index !== 0 ? 'mt-32' : ''}`}
+                data-aos='fade-up'
+              >
+                <DataImage data={img} />
               </div>
-              {idx % 2 === 1 && (
-                <div
-                  className='mt-24 mb-32 col-span-2 max-w-4xl mx-auto'
-                  data-aos='fade-up'
-                >
-                  <h2>{spacePlanning[idx - 1].description}</h2>
-                </div>
-              )}
-            </>
-          );
-        })}
+            ))}
+            {item.description.map((des, idx) => (
+              <div
+                key={idx}
+                className='col-span-2 max-w-4xl mx-auto'
+                data-aos='fade-up'
+              >
+                <h2>{des}</h2>
+              </div>
+            ))}
+          </>
+        ))}
       </div>
     );
   };
@@ -178,7 +174,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
         </div>
       </section>
       <section>{processImage && renderProcess()}</section>
-      <section>{spacePlanningImage && renderSpacePlanning()}</section>
+      <section>{renderSpacePlanning()}</section>
       <section>{rendering3D && render3Ds()}</section>
     </main>
   );
