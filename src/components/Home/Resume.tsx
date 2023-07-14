@@ -10,7 +10,7 @@ const renderExperience = (title: string, info: string, list: string[]) => {
         <h2>{title}</h2>
         <h3>{info}</h3>
       </div>
-      <ul className='list-disc ml-4'>
+      <ul className='list-disc ml-5'>
         {list.map((item, idx) => (
           <li key={idx}>{item}</li>
         ))}
@@ -26,7 +26,7 @@ export const Resume: React.FC = () => {
       <div className='flex justify-center mb-5'>
         <Image src={avatar} width={150} height={150} alt='avatar' />
       </div>
-      <div className='bg-gray py-16 lg:px-20 md:px-6 px-0'>
+      <div className='bg-gray pt-16 pb-40 lg:px-20 md:px-6 px-0'>
         <div className='flex justify-center'>
           <div className='flex md:flex-row flex-col'>
             <PersonalInfo type={IconType.PHONE} />
@@ -55,7 +55,7 @@ export const Resume: React.FC = () => {
             </div>
             <div className='resume-title'>
               <h1 className='text-yellow'>SKILLS</h1>
-              <ul className='list-disc resume-subtitle'>
+              <ul className='list-disc resume-subtitle ml-5'>
                 <li>Adobe Illustrator</li>
                 <li>Adobe Photoshop</li>
                 <li>Auto Cad</li>
@@ -65,13 +65,13 @@ export const Resume: React.FC = () => {
             </div>
             <div className='resume-title'>
               <h1 className='text-yellow'>LANG.</h1>
-              <ul className='list-disc resume-subtitle'>
+              <ul className='list-disc resume-subtitle ml-5'>
                 <li>English</li>
                 <li>Mandarin</li>
               </ul>
             </div>
           </div>
-          <div className='resume-title'>
+          <div className='sm:mt-40 mt-12'>
             <h1 className='text-yellow'>EXPERIENCE</h1>
             <div>
               {[work1, work2, work3].map((item, idx) => (

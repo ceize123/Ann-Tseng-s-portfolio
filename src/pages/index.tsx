@@ -3,7 +3,7 @@ import Quote from 'components/Home/Quote';
 import Resume from 'components/Home/Resume';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
-import bgUrl from 'assets/images/bg.png';
+import bgUrl from 'assets/images/bg.jpg';
 import { cn } from 'helpers';
 
 export const Home: React.FC = () => {
