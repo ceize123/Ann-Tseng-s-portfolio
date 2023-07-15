@@ -72,17 +72,8 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
   }, []);
 
   if (!work) return <Skeleton />;
-  const {
-    title,
-    banner,
-    year,
-    skill,
-    software,
-    overview,
-    processImage,
-    processDescription,
-    rendering3D,
-  } = work.fields;
+  const { title, banner, year, skill, software, overview, rendering3D } =
+    work.fields;
 
   const renderTextArray = (textAry: string[]) => {
     return textAry.map((item: string, idx: number) => (
@@ -93,56 +84,74 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
     ));
   };
 
-  const renderProcess = () => {
-    return processImage?.map((item, idx) => (
-      <div key={item.sys.id} className='mt-48' data-aos='fade-up'>
-        <DataImage data={item} />
-        {processDescription && processDescription[idx] && (
-          <div className='large-margin max-w-4xl mx-auto' data-aos='fade-up'>
-            <h2>{processDescription[idx]}</h2>
-          </div>
-        )}
-      </div>
-    ));
-  };
-
-  const getSpacePlanning = (data: any) => {
-    let ary: { image: Asset[]; description: string[] }[] = [];
-    Object.keys(work.fields).map((item) => {
-      if (item.includes('spacePlanningImage'))
-        ary.push({ image: data[item], description: [] });
-      if (item.includes('spacePlanningDescription'))
-        ary[ary.length - 1]['description'] = data[item];
+  const getArray = (data: any, image: string, description: string) => {
+    const images = Object.keys(data).filter((item) => item.includes(image));
+    const descriptions = Object.keys(data).filter((item) =>
+      item.includes(description)
+    );
+    const ary = images.map((item, idx) => {
+      return {
+        image: data[item],
+        description:
+          descriptions[idx] !== undefined ? data[descriptions[idx]] : '',
+      };
     });
+
     return ary;
   };
 
+  const renderProcess = () => {
+    const processDesign = getArray(
+      work.fields,
+      'processImage',
+      'processDescription'
+    );
+    return processDesign?.map((item, idx) => {
+      const descriptions = item.description.split('\n');
+      return (
+        <div key={idx} className='mt-48' data-aos='fade-up'>
+          <DataImage data={item.image} />
+          <div className='mt-20 max-w-4xl mx-auto' data-aos='fade-up'>
+            {descriptions &&
+              descriptions.map((description: string, idx: number) => (
+                <h2 key={idx}>{description}</h2>
+              ))}
+          </div>
+        </div>
+      );
+    });
+  };
+
   const renderSpacePlanning = () => {
-    const spacePlanning = getSpacePlanning(work.fields);
+    const spacePlanning = getArray(
+      work.fields,
+      'spacePlanningImage',
+      'spacePlanningDescription'
+    );
     return (
       <div className='mt-48 grid grid-cols-2 gap-8'>
-        {spacePlanning?.map((item, index) => (
-          <>
-            {item.image.map((img, idx) => (
-              <div
-                key={idx}
-                className={`col-span-1 ${index !== 0 ? 'mt-32' : ''}`}
-                data-aos='fade-up'
-              >
-                <DataImage data={img} />
+        {spacePlanning?.map((item, index) => {
+          const descriptions = item.description.split('\n');
+          return (
+            <>
+              {item.image.map((img: Asset, idx: number) => (
+                <div
+                  key={idx}
+                  className={`col-span-1 ${index !== 0 ? 'mt-32' : ''}`}
+                  data-aos='fade-up'
+                >
+                  <DataImage data={img} />
+                </div>
+              ))}
+              <div className='col-span-2 max-w-4xl mx-auto' data-aos='fade-up'>
+                {descriptions &&
+                  descriptions.map((description: string, idx: number) => (
+                    <h2 key={idx}>{description}</h2>
+                  ))}
               </div>
-            ))}
-            {item.description.map((des, idx) => (
-              <div
-                key={idx}
-                className='col-span-2 max-w-4xl mx-auto'
-                data-aos='fade-up'
-              >
-                <h2>{des}</h2>
-              </div>
-            ))}
-          </>
-        ))}
+            </>
+          );
+        })}
       </div>
     );
   };
@@ -173,7 +182,7 @@ export const WorkDetails: React.FC<props> = ({ work }) => {
           </div>
         </div>
       </section>
-      <section>{processImage && renderProcess()}</section>
+      <section>{renderProcess()}</section>
       <section>{renderSpacePlanning()}</section>
       <section>{rendering3D && render3Ds()}</section>
     </main>

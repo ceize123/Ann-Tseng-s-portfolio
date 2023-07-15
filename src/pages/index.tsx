@@ -79,7 +79,6 @@ export const Home: React.FC = () => {
 
   const backgroundRender = () => {
     return (
-      // <div className='fixed top-0 left-0 flex justify-center'>
       <Image
         src={bgUrl}
         width='0'
@@ -92,7 +91,6 @@ export const Home: React.FC = () => {
           opacity: rate < 0.5 ? 1 - rate : 0.5,
         }}
       />
-      // </div>
     );
   };
 
